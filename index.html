@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 高考倒计时</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .countdown {
+            text-align: center;
+        }
+
+        .countdown h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .countdown p {
+            font-size: 36px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="countdown">
+    <h1>2025 高考倒计时</h1>
+    <p id="timer">加载中...</p>
+</div>
+
+<script>
+    function updateCountdown() {
+        const examDate = new Date('2025-06-07T09:00:00+08:00');  // 2025年6月7日早上9点 CST
+        const now = new Date();
+        const timeDifference = examDate - now;
+
+        if (timeDifference <= 0) {
+            document.getElementById('timer').innerHTML = "考试已开始!";
+            return;
+        }
+
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        const milliseconds = Math.floor((timeDifference % 1000) / 10); // 0.01 秒精度
+
+        document.getElementById('timer').innerHTML =
+            `${days}天 ${hours}小时 ${minutes}分钟 ${seconds}.${milliseconds.toString().padStart(2, '0')}秒`;
+    }
+
+    setInterval(updateCountdown, 10);  // 每 10 毫秒更新一次
+</script>
+
+</body>
+</html>
